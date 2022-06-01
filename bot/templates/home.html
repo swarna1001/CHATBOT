@@ -50,6 +50,14 @@
       .col-3 {
         border: 1px solid green;
       }
+
+      .bot-greet {
+        max-width: 450px;
+      }
+
+      .choices{
+        list-style: none;
+      }
     </style>
   </head>
 
@@ -73,21 +81,61 @@
               ></textarea>
             </div>
             <button type="submit" value="submit" class="btn btn-success">
-              Success
+              send
             </button>
           </form>
         </div>
 
-        <div class="col-2 col-sm-4">
-          <label></label
-          ><input
-            type="text"
-            name="text"
-            class="mobile-text"
-            value="{{ text }}"
-          />
+        <div class="col-2 col-sm-8">
+          <div class="d-flex justify-content-end">
+            <div class="alert alert-success mt-4 bot-greet" role="alert">
+              Greetings from ABCD Company, I am FRIDAY, I have been assigned to
+              guide you through the virtual screening for your domain
+              assignment!<br />
+            </div>
+          </div>
+
+          {% for user_interaction in user_interactions %}
+
+          <div class="d-flex justify-content-start">
+            <div class="alert alert-primary" role="alert">
+              {{ user_interaction.message }}
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-end">
+            <div class="alert alert-success" role="alert">
+              {{ user_interaction.reply }} 
+
+                {% if user_interaction.associated_choice_field == show_degrees %} 
+                  {% for degree in degree_choices %} 
+                    <li class="choices pl-3"> {{ degree }} </li>
+                  {% endfor %} 
+
+                {% elif user_interaction.associated_choice_field == show_interests %}
+                  {% for interest in interest_choices %} 
+                    <li class="choices pl-3"> {{ interest }} </li>
+                  {% endfor %} 
+
+
+                {% elif user_interaction.associated_choice_field == show_experiences %}
+                  {% for experience in experience_choices %} 
+                    <li class="choices pl-3"> {{ experience }} </li>
+                {% endfor %} 
+
+                {% elif user_interaction.associated_choice_field == show_preferences %}
+                  {% for preference in preference_choices %} 
+                    <li class="choices pl-3"> {{ preference }} </li>
+                {% endfor %} 
+
+
+
+
+                {% endif %}
+            </div>
+          </div>
+          {% endfor %}
         </div>
-        <div class="col-3 col-sm-4">BOT</div>
       </div>
     </div>
   </body>

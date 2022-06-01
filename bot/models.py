@@ -11,7 +11,7 @@ DEGREE_TYPES = (
 
 
 class Degree(models.Model):
-    name = models.CharField(max_length=16, unique=True)
+    name = models.CharField(max_length=256, unique=True)
     code = models.CharField(max_length=16, unique=True, null=True, blank=True)
     created_at = models.DateField(default=date.today)
 
@@ -20,7 +20,7 @@ class Degree(models.Model):
 
 
 class Interest(models.Model):
-    name = models.CharField(max_length=16, unique=True)
+    name = models.CharField(max_length=256, unique=True)
     code = models.CharField(max_length=16, unique=True, null=True, blank=True)
     created_at = models.DateField(default=date.today)
 
@@ -29,7 +29,7 @@ class Interest(models.Model):
 
 
 class Preference(models.Model):
-    name = models.CharField(max_length=16, unique=True)
+    name = models.CharField(max_length=256, unique=True)
     code = models.CharField(max_length=16, unique=True, null=True, blank=True)
     created_at = models.DateField(default=date.today)
 
@@ -38,7 +38,7 @@ class Preference(models.Model):
 
 
 class Experience(models.Model):
-    name = models.CharField(max_length=16, unique=True)
+    name = models.CharField(max_length=256, unique=True)
     code = models.CharField(max_length=16, unique=True, null=True, blank=True)
     created_at = models.DateField(default=date.today)
 
@@ -48,7 +48,10 @@ class Experience(models.Model):
 
 class UserInteraction(models.Model):
     message = models.CharField(max_length=256, null=True, blank=True)
-    created_at = models.TimeField(auto_now=False, auto_now_add=False, null=True, blank=True)
+    reply = models.CharField(max_length=1024, null=True, blank=True)
+    associated_choice_field = models.IntegerField(null=True, blank=True)
+    created_at = models.IntegerField(null=True, blank=True)
+    user_choice = models.CharField(max_length=256, null=True, blank=True)
 
     def __str__(self):
         return self.message
