@@ -40,6 +40,7 @@ class Preference(models.Model):
 class Experience(models.Model):
     name = models.CharField(max_length=256, unique=True)
     code = models.CharField(max_length=16, unique=True, null=True, blank=True)
+    value = models.IntegerField(null=True, blank=True)
     created_at = models.DateField(default=date.today)
 
     def __str__(self):
@@ -52,6 +53,8 @@ class UserInteraction(models.Model):
     associated_choice_field = models.IntegerField(null=True, blank=True)
     created_at = models.IntegerField(null=True, blank=True)
     user_choice = models.CharField(max_length=256, null=True, blank=True)
+    is_last = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.message
+        return self.message    
+    

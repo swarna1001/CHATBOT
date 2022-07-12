@@ -39,13 +39,13 @@
         /* max-width: 1280px; */
       }
 
-      .col-1 {
+      /*.col-1 {
         border: 1px solid blue;
       }
 
       .col-2 {
         border: 1px solid red;
-      }
+      }*/
 
       .col-3 {
         border: 1px solid green;
@@ -64,15 +64,18 @@
   <body>
     <div class="con">
       <div class="row d-flex justify-content-center">
-        <div class="col-1 col-sm-3">
+        <div class="col-1 col-sm-3 fixed-top mt-5 ml-5">
           <form
             method="POST"
             enctype="multipart/form-data"
             style="font-family: 'Baloo Chettan 2', cursive"
           >
+          <h3 class="text-center mb-3"> Welcome to ABCD Technologies! <h3>
+          <h6 class="text-center mb-5"> You will be guided for your domain assignment, Please use the below text box to converse on the platform! </h6>
+
+
             {% csrf_token %}
             <div class="form-group">
-              <label for="exampleFormControlTextarea1">Example textarea</label>
               <textarea
                 class="form-control"
                 id="input_test"
@@ -80,22 +83,32 @@
                 rows="3"
               ></textarea>
             </div>
-            <button type="submit" value="submit" class="btn btn-success">
-              send
-            </button>
+            <div class="d-flex justify-content-end mt-1">
+              <button type="submit" value="submit" class="btn btn-success">
+                send
+              </button>
+            </div
           </form>
         </div>
 
-        <div class="col-2 col-sm-8">
-          <div class="d-flex justify-content-end">
+        <div class="col-2 col-sm-7 offset-sm-4">
+          <div class="d-flex justify-content-end ">
             <div class="alert alert-success mt-4 bot-greet" role="alert">
-              Greetings from ABCD Company, I am FRIDAY, I have been assigned to
+              Greetings from ABCD Technologies, I am FRIDAY, I have been assigned to
               guide you through the virtual screening for your domain
               assignment!<br />
             </div>
           </div>
 
           {% for user_interaction in user_interactions %}
+
+            {% if user_interaction.is_last  %}
+              <div class="d-flex justify-content-center mt-4">
+                <div class="alert alert-danger" role="alert">
+                  {{ user_interaction.reply }}
+                </div>
+              </div> 
+              {% else %}
 
           <div class="d-flex justify-content-start">
             <div class="alert alert-primary" role="alert">
@@ -134,6 +147,7 @@
                 {% endif %}
             </div>
           </div>
+          {% endif %}
           {% endfor %}
         </div>
       </div>
